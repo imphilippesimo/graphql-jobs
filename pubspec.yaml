@@ -25,6 +25,10 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.3
   font_awesome_flutter: ^8.5.0
+  graphql_flutter: ^2.1.1-beta.5
+  flutter_markdown: ^0.3.4
+
+
 
 dev_dependencies:
   flutter_test:

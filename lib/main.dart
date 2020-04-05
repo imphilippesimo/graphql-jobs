@@ -1,9 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:graphqljobs/screens/home_screen.dart';
+import 'package:graphqljobs/service/graphql_client/graphql_conf.dart';
 
-void main() {
-  runApp(GraphqlJobs());
-}
+
+GraphQLConfiguration graphQLConfiguration = GraphQLConfiguration();
+
+void main() => runApp(
+      GraphQLProvider(
+        client: graphQLConfiguration.client,
+        child: CacheProvider(
+          child: GraphqlJobs(),
+        ),
+      ),
+    );
 
 class GraphqlJobs extends StatelessWidget {
   // This widget is the root of your application.
