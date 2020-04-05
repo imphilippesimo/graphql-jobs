@@ -27,7 +27,9 @@ class _HomeScreenState extends State<HomeScreen> {
   var _currentTab = 0;
 
   Widget _displayCarousel(List<Job> jobs) {
-    return _selectedIndex == 0 ? JobCarousel(jobs: jobs) : JobCarousel(jobs: jobs);
+    return _selectedIndex == 0
+        ? JobCarousel(jobs: jobs)
+        : JobCarousel(jobs: jobs);
   }
 
   Future<QueryResult> _loadJobs() async {
@@ -122,7 +124,16 @@ class _HomeScreenState extends State<HomeScreen> {
                     return Container();
                   }
                 } else {
-                  return CircularProgressIndicator();
+                  return Padding(
+                    padding:
+                        const EdgeInsets.fromLTRB(100.0, 200.0, 100.0, 200.0),
+                    child: Center(
+                      child: CircularProgressIndicator(
+                        strokeWidth: 8,
+                        backgroundColor: Colors.pink,
+                      ),
+                    ),
+                  );
                 }
               },
             ),
