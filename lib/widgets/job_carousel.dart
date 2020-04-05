@@ -5,6 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:graphqljobs/models/Tag.dart';
 import 'package:graphqljobs/models/company_model.dart';
 import 'package:graphqljobs/models/job_model.dart';
+import 'package:graphqljobs/screens/job_detail_screen.dart';
 import 'package:graphqljobs/widgets/tag_tile.dart';
 
 class JobCarousel extends StatelessWidget {
@@ -53,14 +54,14 @@ class JobCarousel extends StatelessWidget {
             itemBuilder: (BuildContext context, int index) {
               Job job = jobs[index];
               return GestureDetector(
-//                onTap: () => Navigator.push(
-//                  context,
-//                  MaterialPageRoute(
-//                    builder: (_) => DestinationScreen(
-//                      destination: destination,
-//                    ),
-//                  ),
-//                ),
+                onTap: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => JobDetailScreen(
+                      job: job,
+                    ),
+                  ),
+                ),
                 child: Container(
                   margin: EdgeInsets.all(5.0),
                   height: 300.0,
@@ -114,113 +115,117 @@ class JobCarousel extends StatelessWidget {
                           ),
                         ),
                       ),
-                      Container(
-                        width: 400,
-                        height: 180,
-                        decoration: BoxDecoration(
-                            color: Color(0xfffc5185),
-                            borderRadius: BorderRadius.circular(20.0),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black26,
-                                offset: Offset(0.0, 2.0),
-                                blurRadius: 6.0,
-                              ),
-                            ]),
-                        child: Padding(
-                          padding: const EdgeInsets.all(15.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: <Widget>[
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: <Widget>[
-                                  Container(
-                                    height: 100.0,
-                                    width: 100.0,
-                                    decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        borderRadius:
-                                            BorderRadius.circular(50.0),
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: Colors.black26,
-                                            offset: Offset(0.0, 5.0),
-                                            blurRadius: 8.0,
-                                          ),
-                                        ]),
-                                    child: ClipOval(
-                                      child: Image(
-                                        image: _loadImage(job.company),
-                                        fit: BoxFit.cover,
+                      Hero(
+                        tag: job.id,
+                        child: Container(
+                          width: 400,
+                          height: 180,
+                          decoration: BoxDecoration(
+                              color: Color(0xfffc5185),
+                              borderRadius: BorderRadius.circular(20.0),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black26,
+                                  offset: Offset(0.0, 2.0),
+                                  blurRadius: 6.0,
+                                ),
+                              ]),
+                          child: Padding(
+                            padding: const EdgeInsets.all(15.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: <Widget>[
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: <Widget>[
+                                    Container(
+                                      height: 100.0,
+                                      width: 100.0,
+                                      decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius:
+                                              BorderRadius.circular(50.0),
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color: Colors.black26,
+                                              offset: Offset(0.0, 5.0),
+                                              blurRadius: 8.0,
+                                            ),
+                                          ]),
+                                      child: ClipOval(
+                                        child: Image(
+                                          image: _loadImage(job.company),
+                                          fit: BoxFit.cover,
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                  Container(
-                                    width: 200,
-                                    child: Text(
-                                      job.company.name,
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 20.0,
-                                        fontWeight: FontWeight.w600,
-                                        letterSpacing: 1.2,
-                                      ),
-                                      maxLines: 1,
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
-                                  ),
-                                  Row(
-                                    children: <Widget>[
-                                      Icon(
-                                        FontAwesomeIcons.clock,
-                                        size: 10.0,
-                                        color: Colors.white,
-                                      ),
-                                      SizedBox(
-                                        width: 5.0,
-                                      ),
-                                      Text(
-                                        job.commitment.title,
+                                    Container(
+                                      width: 200,
+                                      child: Text(
+                                        job.company.name,
                                         style: TextStyle(
                                           color: Colors.white,
-                                          fontSize: 15.0,
+                                          fontSize: 20.0,
                                           fontWeight: FontWeight.w600,
                                           letterSpacing: 1.2,
                                         ),
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
                                       ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: <Widget>[
-                                  Text(
-                                    job.isFeatured != null && job.isFeatured
-                                        ? "Featured "
-                                        : " ",
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 15.0,
-                                      fontWeight: FontWeight.w600,
-                                      letterSpacing: 1.2,
                                     ),
-                                  ),
-                                  Column(
-                                    crossAxisAlignment: CrossAxisAlignment.end,
-                                    children: <Widget>[
-                                      _displayRemote(job.remotes.length == 0),
-                                      _displayCity(job),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ],
+                                    Row(
+                                      children: <Widget>[
+                                        Icon(
+                                          FontAwesomeIcons.clock,
+                                          size: 10.0,
+                                          color: Colors.white,
+                                        ),
+                                        SizedBox(
+                                          width: 5.0,
+                                        ),
+                                        Text(
+                                          job.commitment.title,
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 15.0,
+                                            fontWeight: FontWeight.w600,
+                                            letterSpacing: 1.2,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: <Widget>[
+                                    Text(
+                                      job.isFeatured != null && job.isFeatured
+                                          ? "Featured "
+                                          : " ",
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 15.0,
+                                        fontWeight: FontWeight.w600,
+                                        letterSpacing: 1.2,
+                                      ),
+                                    ),
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.end,
+                                      children: <Widget>[
+                                        _displayRemote(job.remotes.length == 0),
+                                        _displayCity(job),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),

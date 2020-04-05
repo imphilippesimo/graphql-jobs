@@ -6,6 +6,7 @@ import 'commitment_model.dart';
 import 'company_model.dart';
 
 class Job {
+  String id;
   String title;
   String description;
   Company company;
@@ -17,7 +18,8 @@ class Job {
   List<Tag> tags;
 
   Job(
-      {this.title,
+      {this.id,
+        this.title,
       this.description,
       this.company,
       this.commitment,
@@ -28,6 +30,7 @@ class Job {
       this.tags});
 
   Job.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
     title = json['title'];
     description = json['description'];
     company =

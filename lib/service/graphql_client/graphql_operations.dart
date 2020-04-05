@@ -3,6 +3,8 @@ class GraphQLOperations {
     return """ 
       query{
         jobs(input:{type:"",slug:""}){
+            id
+            description
             title
             company {
               name      
