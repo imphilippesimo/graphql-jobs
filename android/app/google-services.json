@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "205076279653",
+    "firebase_url": "https://graphqljobs.firebaseio.com",
+    "project_id": "graphqljobs",
+    "storage_bucket": "graphqljobs.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:205076279653:android:5e5a19e0602d431f1ff18c",
+        "android_client_info": {
+          "package_name": "com.zerofiltre.graphqljobs"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "205076279653-96hjoqc0pk6pqpr21ugfnecmqb1m59d9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBcamwJEI-MZASoSX0e2IHGzxxg4W02XcY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "205076279653-96hjoqc0pk6pqpr21ugfnecmqb1m59d9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

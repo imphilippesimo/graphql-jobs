@@ -5,7 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:graphqljobs/models/Tag.dart';
 import 'package:graphqljobs/models/company_model.dart';
 import 'package:graphqljobs/models/job_model.dart';
-import 'package:graphqljobs/screens/job_detail_screen.dart';
+import 'file:///C:/zerofiltre/services_tech/flutter/graphql_jobs/lib/screens/home/jobs/job_detail_screen.dart';
 import 'package:graphqljobs/widgets/tag_tile.dart';
 
 class JobCarousel extends StatelessWidget {
@@ -54,14 +54,15 @@ class JobCarousel extends StatelessWidget {
             itemBuilder: (BuildContext context, int index) {
               Job job = jobs[index];
               return GestureDetector(
-                onTap: () => Navigator.push(
+                onTap: () {
+                Navigator.push(
                   context,
                   MaterialPageRoute(
                     builder: (_) => JobDetailScreen(
                       job: job,
                     ),
                   ),
-                ),
+                );},
                 child: Container(
                   margin: EdgeInsets.all(5.0),
                   height: 300.0,

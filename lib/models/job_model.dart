@@ -8,6 +8,7 @@ import 'company_model.dart';
 class Job {
   String id;
   String title;
+  String applyUrl;
   String description;
   Company company;
   Commitment commitment;
@@ -19,7 +20,8 @@ class Job {
 
   Job(
       {this.id,
-        this.title,
+      this.title,
+      this.applyUrl,
       this.description,
       this.company,
       this.commitment,
@@ -29,9 +31,16 @@ class Job {
       this.remotes,
       this.tags});
 
+
+  @override
+  String toString() {
+    return 'Job{id: $id, title: $title, applyUrl: $applyUrl, description: $description, company: $company, commitment: $commitment, cities: $cities, postedAt: $postedAt, isFeatured: $isFeatured, remotes: $remotes, tags: $tags}';
+  }
+
   Job.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     title = json['title'];
+    applyUrl = json['applyUrl'];
     description = json['description'];
     company =
         json['company'] != null ? new Company.fromJson(json['company']) : null;
@@ -63,6 +72,7 @@ class Job {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['title'] = this.title;
+    data['applyUrl'] = this.applyUrl;
     data['description'] = this.description;
     if (this.company != null) {
       data['company'] = this.company.toJson();
@@ -95,15 +105,11 @@ List<Tag> tags = [
   Tag(name: "React")
 ];
 
-Company company = new Company(
-  name: "AddJust",
-  logoUrl:"assets/images/zerofiltre.png"
-);
+Company company =
+    new Company(name: "AddJust", logoUrl: "assets/images/zerofiltre.png");
 
 Company zerofiltre = new Company(
-    name: "Zerofiltre.tech",
-    logoUrl:"assets/images/zerofiltre.png"
-);
+    name: "Zerofiltre.tech", logoUrl: "assets/images/zerofiltre.png");
 
 Commitment commitment = new Commitment(
   title: "Full-time",

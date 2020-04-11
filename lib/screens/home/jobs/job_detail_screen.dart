@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:graphqljobs/models/company_model.dart';
 import 'package:graphqljobs/models/job_model.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class JobDetailScreen extends StatefulWidget {
   final Job job;
@@ -14,9 +16,53 @@ class JobDetailScreen extends StatefulWidget {
 }
 
 class _JobDetailScreenState extends State<JobDetailScreen> {
+  ScrollController _hideButtonController;
+  bool _isVisible = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _hideButtonController = new ScrollController();
+    _hideButtonController.addListener(() {
+      if (_hideButtonController.position.userScrollDirection ==
+          ScrollDirection.reverse) {
+        if (_isVisible == true) {
+          setState(() {
+            _isVisible = false;
+          });
+        }
+      } else {
+        if (_hideButtonController.position.userScrollDirection ==
+            ScrollDirection.forward) {
+          if (_isVisible == false) {
+            setState(() {
+              _isVisible = true;
+            });
+          }
+        }
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: Visibility(
+        visible: _isVisible,
+        child: FloatingActionButton.extended(
+          icon: Icon(
+            FontAwesomeIcons.paperPlane,
+            color: Colors.white,
+          ),
+          label: Text(
+            'Apply',
+            style: TextStyle(color: Colors.white),
+          ),
+          backgroundColor: Color(0xfffc5185),
+          onPressed: () => _apply(widget.job.applyUrl),
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       body: Column(
         children: <Widget>[
           Stack(
@@ -53,11 +99,11 @@ class _JobDetailScreenState extends State<JobDetailScreen> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
                               Container(
-                                height: 100.0,
-                                width: 100.0,
+                                height: 150.0,
+                                width: 150.0,
                                 decoration: BoxDecoration(
                                     color: Colors.white,
-                                    borderRadius: BorderRadius.circular(50.0),
+                                    borderRadius: BorderRadius.circular(75.0),
                                     boxShadow: [
                                       BoxShadow(
                                         color: Colors.black26,
@@ -78,7 +124,7 @@ class _JobDetailScreenState extends State<JobDetailScreen> {
                                   widget.job.company.name,
                                   style: TextStyle(
                                     color: Colors.white,
-                                    fontSize: 20.0,
+                                    fontSize: 30.0,
                                     fontWeight: FontWeight.w600,
                                     letterSpacing: 1.2,
                                   ),
@@ -90,7 +136,7 @@ class _JobDetailScreenState extends State<JobDetailScreen> {
                                 children: <Widget>[
                                   Icon(
                                     FontAwesomeIcons.clock,
-                                    size: 10.0,
+                                    size: 15.0,
                                     color: Colors.white,
                                   ),
                                   SizedBox(
@@ -152,22 +198,6 @@ class _JobDetailScreenState extends State<JobDetailScreen> {
                       color: Colors.white,
                       onPressed: () => Navigator.pop(context),
                     ),
-                    Row(
-                      children: <Widget>[
-                        IconButton(
-                          icon: Icon(Icons.search),
-                          iconSize: 30.0,
-                          color: Colors.white,
-                          onPressed: () => Navigator.pop(context),
-                        ),
-                        IconButton(
-                          icon: Icon(FontAwesomeIcons.sortAmountDown),
-                          iconSize: 25.0,
-                          color: Colors.white,
-                          onPressed: () => Navigator.pop(context),
-                        ),
-                      ],
-                    ),
                   ],
                 ),
               ),
@@ -177,6 +207,7 @@ class _JobDetailScreenState extends State<JobDetailScreen> {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
               child: ListView(
+                controller: _hideButtonController,
                 children: [
                   Text(
                     widget.job.title,
@@ -253,5 +284,19 @@ class _JobDetailScreenState extends State<JobDetailScreen> {
             ],
           )
         : Container();
+  }
+
+  Future _launchURL(String applyUrl) async {
+    if (await canLaunch(applyUrl)) {
+      await launch(applyUrl);
+    } else {
+      throw 'Could not launch $applyUrl';
+    }
+  }
+
+  _apply(String url) {
+    _launchURL(url).then((value) => null).catchError((error) {
+      throw 'Could not launch $url';
+    });
   }
 }

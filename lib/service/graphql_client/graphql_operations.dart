@@ -4,6 +4,7 @@ class GraphQLOperations {
       query{
         jobs(input:{type:"",slug:""}){
             id
+            applyUrl
             description
             title
             company {
