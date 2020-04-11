@@ -53,11 +53,11 @@ class _JobDetailScreenState extends State<JobDetailScreen> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
                               Container(
-                                height: 100.0,
-                                width: 100.0,
+                                height: 150.0,
+                                width: 150.0,
                                 decoration: BoxDecoration(
                                     color: Colors.white,
-                                    borderRadius: BorderRadius.circular(50.0),
+                                    borderRadius: BorderRadius.circular(75.0),
                                     boxShadow: [
                                       BoxShadow(
                                         color: Colors.black26,
@@ -78,7 +78,7 @@ class _JobDetailScreenState extends State<JobDetailScreen> {
                                   widget.job.company.name,
                                   style: TextStyle(
                                     color: Colors.white,
-                                    fontSize: 20.0,
+                                    fontSize: 30.0,
                                     fontWeight: FontWeight.w600,
                                     letterSpacing: 1.2,
                                   ),
@@ -90,7 +90,7 @@ class _JobDetailScreenState extends State<JobDetailScreen> {
                                 children: <Widget>[
                                   Icon(
                                     FontAwesomeIcons.clock,
-                                    size: 10.0,
+                                    size: 15.0,
                                     color: Colors.white,
                                   ),
                                   SizedBox(
