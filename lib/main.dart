@@ -4,30 +4,29 @@ import 'package:graphqljobs/screens/home_screen.dart';
 import 'package:graphqljobs/service/graphql_client/graphql_conf.dart';
 
 
-GraphQLConfiguration graphQLConfiguration = GraphQLConfiguration();
-
-void main() => runApp(
-      GraphQLProvider(
-        client: graphQLConfiguration.client,
-        child: CacheProvider(
-          child: GraphqlJobs(),
-        ),
-      ),
-    );
+void main() {
+  //WidgetsFlutterBinding.ensureInitialized();
+  runApp(MaterialApp(
+    title: 'GraphQL Jobs',
+    debugShowCheckedModeBanner: false,
+    theme: ThemeData(
+      primaryColor: Color(0xFF3EBACE),
+      accentColor: Color(0xFFD8ECF1),
+      scaffoldBackgroundColor: Color(0xFFF3F5F7),
+    ),
+    home: GraphqlJobs(),
+  ));
+}
 
 class GraphqlJobs extends StatelessWidget {
-  // This widget is the root of your application.
+  final GraphQLConfiguration graphQLConfiguration = GraphQLConfiguration();
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'GraphQL Jobs',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primaryColor: Color(0xFF3EBACE),
-        accentColor: Color(0xFFD8ECF1),
-        scaffoldBackgroundColor: Color(0xFFF3F5F7),
+    return GraphQLProvider(
+      client: graphQLConfiguration.client,
+      child: CacheProvider(
+        child: HomeScreen(),
       ),
-      home: HomeScreen(),
     );
   }
 }
