@@ -5,7 +5,7 @@ import 'package:graphqljobs/service/graphql_client/graphql_conf.dart';
 
 
 void main() {
-  //WidgetsFlutterBinding.ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(MaterialApp(
     title: 'GraphQL Jobs',
     debugShowCheckedModeBanner: false,

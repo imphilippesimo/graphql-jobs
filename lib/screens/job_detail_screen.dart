@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:graphqljobs/models/company_model.dart';
 import 'package:graphqljobs/models/job_model.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class JobDetailScreen extends StatefulWidget {
   final Job job;
@@ -14,9 +16,53 @@ class JobDetailScreen extends StatefulWidget {
 }
 
 class _JobDetailScreenState extends State<JobDetailScreen> {
+  ScrollController _hideButtonController;
+  bool _isVisible = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _hideButtonController = new ScrollController();
+    _hideButtonController.addListener(() {
+      if (_hideButtonController.position.userScrollDirection ==
+          ScrollDirection.reverse) {
+        if (_isVisible == true) {
+          setState(() {
+            _isVisible = false;
+          });
+        }
+      } else {
+        if (_hideButtonController.position.userScrollDirection ==
+            ScrollDirection.forward) {
+          if (_isVisible == false) {
+            setState(() {
+              _isVisible = true;
+            });
+          }
+        }
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: Visibility(
+        visible: _isVisible,
+        child: FloatingActionButton.extended(
+          icon: Icon(
+            FontAwesomeIcons.paperPlane,
+            color: Colors.white,
+          ),
+          label: Text(
+            'Apply',
+            style: TextStyle(color: Colors.white),
+          ),
+          backgroundColor: Color(0xfffc5185),
+          onPressed: () => _apply(widget.job.applyUrl),
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       body: Column(
         children: <Widget>[
           Stack(
@@ -177,6 +223,7 @@ class _JobDetailScreenState extends State<JobDetailScreen> {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
               child: ListView(
+                controller: _hideButtonController,
                 children: [
                   Text(
                     widget.job.title,
@@ -253,5 +300,19 @@ class _JobDetailScreenState extends State<JobDetailScreen> {
             ],
           )
         : Container();
+  }
+
+  Future _launchURL(String applyUrl) async {
+    if (await canLaunch(applyUrl)) {
+      await launch(applyUrl);
+    } else {
+      throw 'Could not launch $applyUrl';
+    }
+  }
+
+  _apply(String url) {
+    _launchURL(url).then((value) => null).catchError((error) {
+      throw 'Could not launch $url';
+    });
   }
 }

@@ -54,14 +54,15 @@ class JobCarousel extends StatelessWidget {
             itemBuilder: (BuildContext context, int index) {
               Job job = jobs[index];
               return GestureDetector(
-                onTap: () => Navigator.push(
+                onTap: () {
+                Navigator.push(
                   context,
                   MaterialPageRoute(
                     builder: (_) => JobDetailScreen(
                       job: job,
                     ),
                   ),
-                ),
+                );},
                 child: Container(
                   margin: EdgeInsets.all(5.0),
                   height: 300.0,
