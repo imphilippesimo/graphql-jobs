@@ -1,6 +1,6 @@
 import 'package:graphqljobs/models/remote_model.dart';
 
-import 'Tag.dart';
+import 'tag.dart';
 import 'city_model.dart';
 import 'commitment_model.dart';
 import 'company_model.dart';

@@ -37,7 +37,7 @@ class _AuthenticateScreenState extends State<AuthenticateScreen> {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(30.0, 100.0, 30.0, 200.0),
+          padding: const EdgeInsets.fromLTRB(30.0, 100.0, 30.0, 100.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
