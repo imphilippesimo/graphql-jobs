@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:graphqljobs/models/event_model.dart';
 import 'package:graphqljobs/models/job_model.dart';
 import 'package:graphqljobs/models/user_model.dart';
 import 'package:graphqljobs/screens/home/profile/profile_screen.dart';
@@ -22,6 +23,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  List<Event> events = [graphqlAsia, byteConfGraphQL];
   int _selectedIndex = 0;
   List<IconData> _icons = [
     FontAwesomeIcons.briefcase,
@@ -39,7 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget _displayCarousel(List<Job> jobs) {
     if (_selectedIndex == 0) {
-      return  FutureBuilder<QueryResult>(
+      return FutureBuilder<QueryResult>(
         future: _loadJobs(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
@@ -62,8 +64,7 @@ class _HomeScreenState extends State<HomeScreen> {
             }
           } else {
             return Padding(
-              padding:
-              const EdgeInsets.fromLTRB(100.0, 200.0, 100.0, 200.0),
+              padding: const EdgeInsets.fromLTRB(100.0, 200.0, 100.0, 200.0),
               child: Center(
                 child: CircularProgressIndicator(
                   strokeWidth: 8,
@@ -75,13 +76,15 @@ class _HomeScreenState extends State<HomeScreen> {
         },
       );
     } else if (_selectedIndex == 1) {
-      return EventCarousel(user: widget.user);
+      return EventCarousel(
+        user: widget.user,
+        events: events,
+      );
     } else if (_selectedIndex == 2) {
       return ArticleCarousel(user: widget.user);
     } else {
       return Profile(user: widget.user);
     }
-
   }
 
   Future<QueryResult> _loadJobs() async {

@@ -5,8 +5,10 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:graphqljobs/models/tag.dart';
 import 'package:graphqljobs/models/company_model.dart';
 import 'package:graphqljobs/models/job_model.dart';
+import 'package:graphqljobs/widgets/graphql-colors.dart';
 import 'file:///C:/zerofiltre/services_tech/flutter/graphql_jobs/lib/screens/home/jobs/job_detail_screen.dart';
 import 'package:graphqljobs/widgets/tag_tile.dart';
+import 'package:graphqljobs/widgets/text_style_guide.dart';
 
 class JobCarousel extends StatelessWidget {
   final List<Job> jobs;
@@ -15,6 +17,7 @@ class JobCarousel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeData = Theme.of(context);
     return Column(
       children: <Widget>[
         Padding(
@@ -36,7 +39,7 @@ class JobCarousel extends StatelessWidget {
                 child: Text(
                   'See All',
                   style: TextStyle(
-                    color: Theme.of(context).primaryColor,
+                    color: themeData.primaryColor,
                     fontSize: 16.0,
                     fontWeight: FontWeight.w600,
                     letterSpacing: 1.0,
@@ -55,14 +58,15 @@ class JobCarousel extends StatelessWidget {
               Job job = jobs[index];
               return GestureDetector(
                 onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) => JobDetailScreen(
-                      job: job,
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => JobDetailScreen(
+                        job: job,
+                      ),
                     ),
-                  ),
-                );},
+                  );
+                },
                 child: Container(
                   margin: EdgeInsets.all(5.0),
                   height: 300.0,
@@ -122,7 +126,7 @@ class JobCarousel extends StatelessWidget {
                           width: 400,
                           height: 180,
                           decoration: BoxDecoration(
-                              color: Color(0xfffc5185),
+                              color: GraphQLColors.main,
                               borderRadius: BorderRadius.circular(20.0),
                               boxShadow: [
                                 BoxShadow(
@@ -166,12 +170,7 @@ class JobCarousel extends StatelessWidget {
                                       width: 200,
                                       child: Text(
                                         job.company.name,
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 20.0,
-                                          fontWeight: FontWeight.w600,
-                                          letterSpacing: 1.2,
-                                        ),
+                                        style: TextStyleGuide.JobCardMainTitle,
                                         maxLines: 1,
                                         overflow: TextOverflow.ellipsis,
                                       ),
