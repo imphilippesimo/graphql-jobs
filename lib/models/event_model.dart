@@ -40,7 +40,7 @@ Event graphqlAsia = Event(
   punchline1: 'Asia’s largest GraphQL conference ',
   punchline2: 'is back!',
   description:
-      'GraphQL Asia is the largest gathering of the GraphQL community in Asia! With over 500 people expected at the 2020 edition, you’ll meet the creators of leading GraphQL tooling, talk to the experts implementing GraphQL in their companies as well as practitioners and enthusiasts from Asia and the rest of the world',
+      'GraphQL Asia is the largest gathering of the GraphQL community in Asia! With over 500 people expected at the 2020 edition, you’ll meet the creators of leading GraphQL tooling, talk to the experts implementing GraphQL in their companies as well as practitioners and enthusiasts from Asia and the rest of the world.',
   guests: graphqlAsiaGuests,
   workshops: graphqlasiaWorkshops,
   sponsors: [
@@ -58,9 +58,9 @@ Event byteConfGraphQL = Event(
       'https://byteconf-production.s3.amazonaws.com/headers/byteconf-graphql.png',
   punchline1: 'Byteconf GraphQL ',
   punchline2:
-      'is a 100% free single-day conference with the best GraphQL speakers and teachers in the world',
+      'is 100% FREE.',
   description:
-      "Byteconf GraphQL is a 100% free single-day conference with the best GraphQL speakers and teachers in the world",
+      "Byteconf GraphQL is a 100% free single-day conference with the best GraphQL speakers and teachers in the world.",
   guests: byteConfGuests,
   workshops: byteconfWorkshops,
   sponsors: [

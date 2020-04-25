@@ -1,10 +1,11 @@
 import 'dart:ui';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:graphqljobs/models/event_model.dart';
 import 'package:graphqljobs/widgets/graphql-colors.dart';
-import 'package:graphqljobs/widgets/tag_tile.dart';
 import 'package:graphqljobs/widgets/text_style_guide.dart';
 
 import 'icon_text.dart';
@@ -30,19 +31,19 @@ class EventTile extends StatelessWidget {
           children: <Widget>[
             Stack(
               children: [
-                DecoratedBox(
-                  decoration: BoxDecoration(
-                    color: GraphQLColors.main.withOpacity(0.7),
-                    borderRadius: BorderRadius.all(Radius.circular(30.0)),
-                  ),
-                  position: DecorationPosition.foreground,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.all(Radius.circular(30.0)),
-                    child: Image(
-                      height: 300,
-                      image: NetworkImage(event.imageUrl),
-                      fit: BoxFit.cover,
+                ClipRRect(
+                  borderRadius: BorderRadius.all(Radius.circular(30.0)),
+                  child: CachedNetworkImage(
+                    imageUrl: event.imageUrl,
+                    placeholder: (context, url) => SpinKitDoubleBounce(
+                      color: GraphQLColors.main,
+                      size: 50.0,
                     ),
+                    errorWidget: (context, url, error) => Icon(Icons.error),
+                    fit: BoxFit.cover,
+                    height: 300.0,
+                    color: GraphQLColors.main,
+                    colorBlendMode: BlendMode.darken,
                   ),
                 ),
                 Positioned(
@@ -56,14 +57,13 @@ class EventTile extends StatelessWidget {
                 Positioned(
                   top: 60.0,
                   left: 20.0,
-                  child: _displayLocation(event),
+                  child: displayLocation(event, mediaQueryData.size.width),
                 ),
                 Positioned(
                   bottom: 20.0,
                   right: 20.0,
                   child: _displayDate(event),
                 ),
-
               ],
             ),
             SizedBox(
@@ -94,14 +94,15 @@ _displayDate(Event event) {
     ),
     text: Text(
       event.date,
-      style: TextStyleGuide.listCardTitleSecondary,
+      style: TextStyleGuide.listCardTitleSecondary(Colors.white),
     ),
   );
 }
 
-_displayLocation(Event event) {
+Widget displayLocation(Event event, double width) {
   return event.location != null
       ? IconText(
+          width: width,
           icon: Icon(
             FontAwesomeIcons.locationArrow,
             size: 15.0,
@@ -109,10 +110,11 @@ _displayLocation(Event event) {
           ),
           text: Text(
             event.location,
-            style: TextStyleGuide.listCardTitleSecondary,
+            style: TextStyleGuide.listCardTitleSecondary(Colors.white),
           ),
         )
       : IconText(
+          width: width,
           icon: Icon(
             Icons.live_tv,
             size: 20.0,
@@ -120,7 +122,7 @@ _displayLocation(Event event) {
           ),
           text: Text(
             'Live',
-            style: TextStyleGuide.listCardTitleSecondary,
+            style: TextStyleGuide.listCardTitleSecondary(Colors.white),
           ),
         );
 }

@@ -3,6 +3,8 @@ import 'package:graphqljobs/models/event_model.dart';
 import 'package:graphqljobs/models/user_model.dart';
 import 'package:graphqljobs/widgets/event_tile.dart';
 
+import 'event_detail_screen.dart';
+
 class EventCarousel extends StatelessWidget {
   final User user;
   final List<Event> events;
@@ -18,6 +20,16 @@ class EventCarousel extends StatelessWidget {
         itemBuilder: (BuildContext context, int index) {
           Event event = events[index];
           return GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => EventDetailScreen(
+                    event: event,
+                  ),
+                ),
+              );
+            },
             child: EventTile(
               event: event,
             ),

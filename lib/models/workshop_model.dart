@@ -46,9 +46,9 @@ Workshop buildAppReactApollo = Workshop(
   ],
 );
 Workshop buildserverlessapps = Workshop(
-  title: 'Building apps with React & Apollo Client',
+  title: 'Build high-performance GraphQL & serverless apps with the 3factor app architecture',
   description:
-  "Build high-performance GraphQL & serverless apps with the 3factor app architecture",
+  "3factor app is an architecture pattern for modern apps. 3factor proposes an architecture pattern which is composed of 3 factors namely 1) realtime GraphQL, 2) reliable eventing and 3) async serverless. You will learn where monolithic architectures fall short and how to build scalable and reliable apps in 3factor style.",
   level: 'Intermediate',
   date: 'Feb 20, 2022',
   begin: '01:00 PM',

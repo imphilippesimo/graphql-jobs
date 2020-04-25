@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:graphqljobs/models/event_model.dart';
@@ -8,6 +9,7 @@ import 'package:graphqljobs/models/user_model.dart';
 import 'package:graphqljobs/screens/home/profile/profile_screen.dart';
 import 'package:graphqljobs/service/graphql_client/graphql_conf.dart';
 import 'package:graphqljobs/service/graphql_client/graphql_operations.dart';
+import 'package:graphqljobs/widgets/text_style_guide.dart';
 
 import 'blog/article_carousel.dart';
 import 'events/event_screen.dart';
@@ -66,9 +68,9 @@ class _HomeScreenState extends State<HomeScreen> {
             return Padding(
               padding: const EdgeInsets.fromLTRB(100.0, 200.0, 100.0, 200.0),
               child: Center(
-                child: CircularProgressIndicator(
-                  strokeWidth: 8,
-                  backgroundColor: Colors.pink,
+                child: SpinKitDoubleBounce(
+                  color: Colors.pink,
+                  size: 50.0,
                 ),
               ),
             );
@@ -142,10 +144,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     Text(
                       'Work with GraphQL\n' + 'in a modern startup.',
                       softWrap: true,
-                      style: TextStyle(
-                        fontSize: 30.0,
-                        fontWeight: FontWeight.bold,
-                      ),
+                      style: TextStyleGuide.mainTitle(Colors.black),
                     ),
                     Container(
                       height: 30.0,
