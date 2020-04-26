@@ -185,7 +185,19 @@ class _HomeScreenState extends State<HomeScreen> {
                   )
                   .toList(),
             ),
-            SizedBox(
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.horizontal(
+                    left: Radius.circular(30), right: Radius.circular(30)),
+                color: Theme.of(context).scaffoldBackgroundColor,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black26,
+                    offset: Offset(0.0, 8.0),
+                    blurRadius: 6.0,
+                  ),
+                ],
+              ),
               height: 20.0,
             ),
             _displayCarousel(jobs),

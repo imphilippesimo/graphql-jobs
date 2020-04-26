@@ -73,17 +73,29 @@ class EventDetailContent extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             child: _displayGuests(event),
           ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 0.0),
-            child: RichText(
-              text: TextSpan(children: [
-                TextSpan(
-                    text: event.punchline1,
-                    style: TextStyleGuide.punchLine1(GraphQLColors.main)),
-                TextSpan(
-                    text: event.punchline2,
-                    style: TextStyleGuide.punchLine2(Colors.black)),
-              ]),
+          Container(
+            decoration: BoxDecoration(
+              color: Theme.of(context).scaffoldBackgroundColor,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black12,
+                  offset: Offset(0.0, 5.0),
+                  blurRadius: 5.0,
+                ),
+              ],
+            ),
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 0.0),
+              child: RichText(
+                text: TextSpan(children: [
+                  TextSpan(
+                      text: event.punchline1,
+                      style: TextStyleGuide.punchLine1(GraphQLColors.main)),
+                  TextSpan(
+                      text: event.punchline2,
+                      style: TextStyleGuide.punchLine2(Colors.black)),
+                ]),
+              ),
             ),
           ),
           Expanded(

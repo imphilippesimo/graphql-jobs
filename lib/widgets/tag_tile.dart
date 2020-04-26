@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:graphqljobs/models/tag.dart';
+import 'package:graphqljobs/models/tag_model.dart';
 
 class TagTile extends StatelessWidget {
   final Tag tag;
