@@ -33,17 +33,19 @@ class EventTile extends StatelessWidget {
               children: [
                 ClipRRect(
                   borderRadius: BorderRadius.all(Radius.circular(30.0)),
-                  child: CachedNetworkImage(
-                    imageUrl: event.imageUrl,
-                    placeholder: (context, url) => SpinKitDoubleBounce(
+                  child: Center(
+                    child: CachedNetworkImage(
+                      imageUrl: event.imageUrl,
+                      placeholder: (context, url) => SpinKitDoubleBounce(
+                        color: GraphQLColors.main,
+                        size: 50.0,
+                      ),
+                      errorWidget: (context, url, error) => Icon(Icons.error),
+                      fit: BoxFit.cover,
+                      height: 300.0,
                       color: GraphQLColors.main,
-                      size: 50.0,
+                      colorBlendMode: BlendMode.darken,
                     ),
-                    errorWidget: (context, url, error) => Icon(Icons.error),
-                    fit: BoxFit.cover,
-                    height: 300.0,
-                    color: GraphQLColors.main,
-                    colorBlendMode: BlendMode.darken,
                   ),
                 ),
                 Positioned(
