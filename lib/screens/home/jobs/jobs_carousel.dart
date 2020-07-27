@@ -6,7 +6,8 @@ import 'package:graphqljobs/models/tag_model.dart';
 import 'package:graphqljobs/models/company_model.dart';
 import 'package:graphqljobs/models/job_model.dart';
 import 'package:graphqljobs/widgets/graphql-colors.dart';
-import 'file:///C:/zerofiltre/services_tech/flutter/graphql_jobs/lib/screens/home/jobs/job_detail_screen.dart';
+import 'job_detail_screen.dart';
+// import 'file:///C:/zerofiltre/services_tech/flutter/graphql_jobs/lib/screens/home/jobs/job_detail_screen.dart';
 import 'package:graphqljobs/widgets/tag_tile.dart';
 import 'package:graphqljobs/widgets/text_style_guide.dart';
 
